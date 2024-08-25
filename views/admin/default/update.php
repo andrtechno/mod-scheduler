@@ -8,9 +8,8 @@
 
 use yii\helpers\Html;
 use panix\mod\scheduler\models\SchedulerTask;
-use yii\bootstrap\Tabs;
-use yii\bootstrap\ActiveForm;
-use webtoolsnz\widgets\RadioButtonGroup;
+use yii\bootstrap4\Tabs;
+use yii\bootstrap4\ActiveForm;
 use yii\grid\GridView;
 
 
@@ -41,12 +40,8 @@ $this->params['breadcrumbs'][] = $model->__toString();
     <?= $form->field($model, 'last_run', ['inputOptions' => ['disabled' => 'disabled']]) ?>
     <?= $form->field($model, 'next_run', ['inputOptions' => ['disabled' => 'disabled']]) ?>
 
-    <?= $form->field($model, 'active')->widget(RadioButtonGroup::className(), [
-        'items' => [1 => 'Yes', 0 => 'No'],
-        'itemOptions' => [
-            'buttons' => [0 => ['activeState' => 'btn active btn-danger']]
-        ]
-    ]); ?>
+    <?= $form->field($model, 'active')->dropdownList([1 => 'Yes', 0 => 'No']);
+    ?>
 
     <?= Html::submitButton('<span class="glyphicon glyphicon-check"></span> ' . ($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Save')), [
         'id' => 'save-' . $model->formName(),

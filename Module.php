@@ -1,6 +1,7 @@
 <?php
 namespace panix\mod\scheduler;
 
+use panix\engine\WebModule;
 use panix\mod\scheduler\models\SchedulerLog;
 use Yii;
 use yii\base\BootstrapInterface;
@@ -11,31 +12,31 @@ use yii\helpers\ArrayHelper;
  * Class Module
  * @package panix\mod\scheduler
  */
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends WebModule
 {
     /**
      * Path where task files can be found in the application structure.
      * @var string
      */
-    public $taskPath = '@app/tasks';
+    public $taskPath = '@app/cron';
 
     /**
      * Namespace that tasks use.
      * @var string
      */
-    public $taskNameSpace = 'app\tasks';
+    public $taskNameSpace = 'app\cron';
 
     /**
      * Bootstrap the console controllers.
      * @param \yii\base\Application $app
      */
-    public function bootstrap($app)
+    public function bootstrap22($app)
     {
         Yii::setAlias('@scheduler', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src');
 
         if ($app instanceof \yii\console\Application && !isset($app->controllerMap[$this->id])) {
             $app->controllerMap[$this->id] = [
-                'class' => 'panix\mod\scheduler\console\SchedulerController',
+                'class' => 'panix\mod\scheduler\commands\SchedulerController',
             ];
         }
     }

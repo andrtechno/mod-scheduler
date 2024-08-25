@@ -1,6 +1,6 @@
 <?php
 
-namespace panix\mod\scheduler\console;
+namespace panix\mod\scheduler\commands;
 
 use panix\mod\scheduler\events\SchedulerEvent;
 use panix\mod\scheduler\models\base\SchedulerLog;

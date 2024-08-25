@@ -1,0 +1,25 @@
+{
+  "name": "panix/mod-scheduler",
+  "description": "scheduler module",
+  "keywords": [
+    "scheduler"
+  ],
+  "type": "pixelion-module",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "PIXELION CMS",
+      "email": "dev@pixelion.com.ua",
+      "homepage": "https://pixelion.com.ua"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "^2.0.9",
+    "mtdowling/cron-expression": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "panix\\mod\\scheduler\\": ""
+    }
+  }
+}

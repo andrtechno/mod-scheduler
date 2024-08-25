@@ -3,7 +3,7 @@
 return [
     'MODULE_NAME' => 'Планировщик',
     'ID' => 'ID',
-    'Name' => 'Развание',
+    'Name' => 'Название',
     'Schedule' => 'Разписание',
     'Description' => 'Описание',
     'Status ID' => 'Статус',
@@ -12,10 +12,10 @@ return [
     'Next Run' => 'Следующий запуск',
     'Active' => 'Активный',
 
-    'STATUS_INACTIVE' => 'Не активный',
-    'STATUS_PENDING' => 'Ожидание',
-    'STATUS_DUE' => 'Подготовка',
-    'STATUS_RUNNING' => 'Запущен',
-    'STATUS_OVERDUE' => 'Просроченный',
-    'STATUS_ERROR' => 'Ошибка',
+    'INACTIVE' => 'Не активный',
+    'PENDING' => 'Ожидание',
+    'DUE' => 'Подготовка',
+    'RUNNING' => 'Запущен',
+    'OVERDUE' => 'Просроченный',
+    'ERROR' => 'Ошибка',
 ];

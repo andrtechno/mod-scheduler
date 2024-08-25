@@ -30,6 +30,7 @@ class SchedulerTask extends \yii\db\ActiveRecord
         return '{{%scheduler_task}}';
     }
 
+
     /**
      *
      */

@@ -36,15 +36,17 @@ $this->params['breadcrumbs'][] = $model->__toString();
 
             <dt>Result</dt>
             <dd>
+
                 <?php if ($model->error): ?>
-                    <span class="text-danger glyphicon glyphicon-remove-circle"></span> Error
+                    <span class="text-danger icon-warning"></span> Error
                 <?php else: ?>
-                    <span class="text-success glyphicon glyphicon-ok-circle"></span> Success
+                    <span class="text-success icon-check"></span> Success
                 <?php endif ?>
             </dd>
         </dl>
 
         <h3>Output</h3>
-        <textarea class="form-control" rows="7"><?= $model->output ?></textarea>
+
+        <pre><?= $model->output ?></pre>
     </div>
 </div>

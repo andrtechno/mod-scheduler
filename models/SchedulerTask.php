@@ -21,14 +21,21 @@ class SchedulerTask extends \panix\mod\scheduler\models\base\SchedulerTask
      * @var array
      */
     private static $_statuses = [
-        self::STATUS_INACTIVE => 'STATUS_INACTIVE',
-        self::STATUS_PENDING => 'STATUS_PENDING',
-        self::STATUS_DUE => 'STATUS_DUE',
-        self::STATUS_RUNNING => 'STATUS_RUNNING',
-        self::STATUS_OVERDUE => 'STATUS_OVERDUE',
-        self::STATUS_ERROR => 'STATUS_ERROR',
+        self::STATUS_INACTIVE => 'INACTIVE',
+        self::STATUS_PENDING => 'PENDING',
+        self::STATUS_DUE => 'DUE',
+        self::STATUS_RUNNING => 'RUNNING',
+        self::STATUS_OVERDUE => 'OVERDUE',
+        self::STATUS_ERROR => 'ERROR',
     ];
 
+    private static $_statusColors = [
+        self::STATUS_PENDING => 'light',
+        self::STATUS_DUE => 'warning',
+        self::STATUS_OVERDUE => 'danger',
+        self::STATUS_RUNNING => 'success',
+        self::STATUS_ERROR => 'danger',
+    ];
     /**
      * Return Taskname
      * @return string
@@ -70,6 +77,11 @@ class SchedulerTask extends \panix\mod\scheduler\models\base\SchedulerTask
     public function getStatus()
     {
         return isset(self::$_statuses[$this->status_id]) ? self::$_statuses[$this->status_id] : null;
+    }
+
+    public function getStatusColor()
+    {
+        return isset(self::$_statusColors[$this->status_id]) ? self::$_statusColors[$this->status_id] : null;
     }
 
 

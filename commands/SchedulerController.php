@@ -106,17 +106,17 @@ class SchedulerController extends Controller
             $rowsList[]=[
                 //$model->name,
                 $this->ansiFormat($model->name, $color),
-                $model->schedule.PHP_EOL.\panix\mod\scheduler\components\translate\CronTranslator::translate($model->schedule, 'ru', true),
-                is_null($model->last_run) ? 'NULL' : $model->last_run,
-                $model->next_run,
-                $this->ansiFormat($model->getStatus(), $color)
+                $this->ansiFormat($model->schedule.PHP_EOL.\panix\mod\scheduler\components\translate\CronTranslator::translate($model->schedule, Yii::$app->language, true), $color),
+                $this->ansiFormat(is_null($model->last_run) ? 'NULL' : $model->last_run, $color),
+                $this->ansiFormat($model->next_run, $color),
+                $this->ansiFormat(Yii::t('scheduler/default',$model->getStatus()), $color)
             ];
            // echo $this->ansiFormat($row, $color).PHP_EOL;
 
 
         }
         echo Table::widget([
-            'headers' => ['Task', 'Разписание', 'Посл. запуск','След. запуск','Статус'],
+            'headers' => ['Задача', 'Разписание', 'Посл. запуск','След. запуск','Статус'],
             'rows' => $rowsList,
         ]);
     }

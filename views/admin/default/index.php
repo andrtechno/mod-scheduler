@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                     'contentOptions'=>['class'=>'text-center'],
                     'value' => function (SchedulerTask $model) {
-                        return Yii::t('scheduler/default', $model->status);
+                        return Html::tag('span',Yii::t('scheduler/default', $model->status),['class'=>'badge badge-'.$model->getStatusColor()]);
                     }
                 ],
                 [

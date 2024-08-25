@@ -24,7 +24,7 @@ class SchedulerLog extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'scheduler_log';
+        return '{{%scheduler_log}}';
     }
 
     /**

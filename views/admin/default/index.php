@@ -6,12 +6,14 @@
  * @var \yii\data\ActiveDataProvider $dataProvider
  * @var \panix\mod\scheduler\models\SchedulerTask $model
  */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use panix\engine\grid\GridView;
 use yii\widgets\Pjax;
+use panix\mod\scheduler\models\SchedulerTask;
 
-$this->title = \panix\mod\scheduler\models\SchedulerTask::label(2);
+$this->title = SchedulerTask::label(2);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -34,25 +36,52 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'name',
                     'format' => 'raw',
-                    'value' => function ($t) {
-                        return Html::a($t->name, ['update', 'id' => $t->id]);
+                    'value' => function (SchedulerTask $model) {
+                        return Html::a($model->name, ['update', 'id' => $model->id]);
                     }
                 ],
-
                 'description',
-
                 [
                     'attribute' => 'schedule',
                     'format' => 'raw',
-                    'value' => function ($t) {
-                        // return $t->schedule;
-                        return $t->schedule.'<br>'.\panix\mod\scheduler\components\translate\CronTranslator::translate($t->schedule, Yii::$app->language, true);
+                    'contentOptions'=>['class'=>'text-center'],
+                    'value' => function (SchedulerTask $model) {
+                        return $model->schedule . '<br>' . \panix\mod\scheduler\components\translate\CronTranslator::translate($model->schedule, Yii::$app->language, true);
                     }
                 ],
-                'status',
-                'started_at',
-                'last_run',
-                'next_run',
+                [
+                    'attribute' => 'status',
+                    'format' => 'raw',
+                    'contentOptions'=>['class'=>'text-center'],
+                    'value' => function (SchedulerTask $model) {
+                        return Yii::t('scheduler/default', $model->status);
+                    }
+                ],
+                [
+                    'attribute' => 'started_at',
+                    'format' => 'raw',
+                    'contentOptions'=>['class'=>'text-center'],
+                    'value' => function (SchedulerTask $model) {
+                        return $model->started_at;
+                    }
+                ],
+                [
+                    'attribute' => 'last_run',
+                    'format' => 'raw',
+                    'contentOptions'=>['class'=>'text-center'],
+                    'value' => function (SchedulerTask $model) {
+                        return $model->last_run;
+                    }
+                ],
+                [
+                    'attribute' => 'next_run',
+                    'format' => 'raw',
+                    'contentOptions'=>['class'=>'text-center'],
+                    'value' => function (SchedulerTask $model) {
+                        return $model->next_run;
+                    }
+                ],
+
             ],
         ]); ?>
         <?php Pjax::end(); ?>

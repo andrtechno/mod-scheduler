@@ -21,12 +21,12 @@ class SchedulerTask extends \panix\mod\scheduler\models\base\SchedulerTask
      * @var array
      */
     private static $_statuses = [
-        self::STATUS_INACTIVE => 'Inactive',
-        self::STATUS_PENDING => 'Pending',
-        self::STATUS_DUE => 'Due',
-        self::STATUS_RUNNING => 'Running',
-        self::STATUS_OVERDUE => 'Overdue',
-        self::STATUS_ERROR => 'Error',
+        self::STATUS_INACTIVE => 'STATUS_INACTIVE',
+        self::STATUS_PENDING => 'STATUS_PENDING',
+        self::STATUS_DUE => 'STATUS_DUE',
+        self::STATUS_RUNNING => 'STATUS_RUNNING',
+        self::STATUS_OVERDUE => 'STATUS_OVERDUE',
+        self::STATUS_ERROR => 'STATUS_ERROR',
     ];
 
     /**

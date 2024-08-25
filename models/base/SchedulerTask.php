@@ -27,7 +27,7 @@ class SchedulerTask extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'scheduler_task';
+        return '{{%scheduler_task}}';
     }
 
     /**
@@ -67,15 +67,15 @@ class SchedulerTask extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'schedule' => Yii::t('app', 'Schedule'),
-            'description' => Yii::t('app', 'Description'),
-            'status_id' => Yii::t('app', 'Status ID'),
-            'started_at' => Yii::t('app', 'Started At'),
-            'last_run' => Yii::t('app', 'Last Run'),
-            'next_run' => Yii::t('app', 'Next Run'),
-            'active' => Yii::t('app', 'Active'),
+            'id' => Yii::t('scheduler/default', 'ID'),
+            'name' => Yii::t('scheduler/default', 'Name'),
+            'schedule' => Yii::t('scheduler/default', 'Schedule'),
+            'description' => Yii::t('scheduler/default', 'Description'),
+            'status_id' => Yii::t('scheduler/default', 'Status ID'),
+            'started_at' => Yii::t('scheduler/default', 'Started At'),
+            'last_run' => Yii::t('scheduler/default', 'Last Run'),
+            'next_run' => Yii::t('scheduler/default', 'Next Run'),
+            'active' => Yii::t('scheduler/default', 'Active'),
         ];
     }
 

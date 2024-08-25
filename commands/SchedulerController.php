@@ -10,6 +10,7 @@ use panix\mod\scheduler\TaskRunner;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\console\Controller;
+use yii\console\widgets\Table;
 use yii\helpers\Console;
 
 
@@ -89,6 +90,7 @@ class SchedulerController extends Controller
 
         echo $this->ansiFormat('Scheduled Tasks', Console::UNDERLINE).PHP_EOL;
 
+        $rowsList = [];
         foreach ($models as $model) { /* @var SchedulerTask $model */
             $row = sprintf(
                 "%s\t%s\t%s\t%s\t%s",
@@ -99,9 +101,24 @@ class SchedulerController extends Controller
                 $model->getStatus()
             );
 
+
             $color = isset($this->_statusColors[$model->status_id]) ? $this->_statusColors[$model->status_id] : null;
-            echo $this->ansiFormat($row, $color).PHP_EOL;
+            $rowsList[]=[
+                //$model->name,
+                $this->ansiFormat($model->name, $color),
+                $model->schedule.PHP_EOL.\panix\mod\scheduler\components\translate\CronTranslator::translate($model->schedule, 'ru', true),
+                is_null($model->last_run) ? 'NULL' : $model->last_run,
+                $model->next_run,
+                $this->ansiFormat($model->getStatus(), $color)
+            ];
+           // echo $this->ansiFormat($row, $color).PHP_EOL;
+
+
         }
+        echo Table::widget([
+            'headers' => ['Task', 'Разписание', 'Посл. запуск','След. запуск','Статус'],
+            'rows' => $rowsList,
+        ]);
     }
 
     /**

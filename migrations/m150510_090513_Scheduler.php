@@ -2,12 +2,14 @@
 
 use yii\db\Schema;
 use yii\db\Migration;
+use panix\mod\scheduler\models\SchedulerLog;
+use panix\mod\scheduler\models\SchedulerTask;
 
 class m150510_090513_Scheduler extends Migration
 {
     public function safeUp()
     {
-        $this->createTable('scheduler_log', [
+        $this->createTable(SchedulerLog::tableName(), [
             'id'=> Schema::TYPE_PK.'',
             'scheduler_task_id'=> Schema::TYPE_INTEGER.'(11) NOT NULL',
             'started_at'=> Schema::TYPE_TIMESTAMP.' NOT NULL DEFAULT CURRENT_TIMESTAMP',
@@ -16,10 +18,10 @@ class m150510_090513_Scheduler extends Migration
             'error'=> Schema::TYPE_BOOLEAN.'(1) NOT NULL DEFAULT "0"',
         ], 'ENGINE=InnoDB');
 
-        $this->createIndex('id_UNIQUE', 'scheduler_log','id',1);
-        $this->createIndex('fk_table1_scheduler_task_idx', 'scheduler_log','scheduler_task_id',0);
+        $this->createIndex('id_UNIQUE', SchedulerLog::tableName(),'id',1);
+        $this->createIndex('fk_table1_scheduler_task_idx', SchedulerLog::tableName(),'scheduler_task_id',0);
 
-        $this->createTable('scheduler_task', [
+        $this->createTable(SchedulerTask::tableName(), [
             'id'=> Schema::TYPE_PK.'',
             'name'=> Schema::TYPE_STRING.'(45) NOT NULL',
             'schedule'=> Schema::TYPE_STRING.'(45) NOT NULL',
@@ -31,18 +33,18 @@ class m150510_090513_Scheduler extends Migration
             'active'=> Schema::TYPE_BOOLEAN.'(1) NOT NULL DEFAULT "0"',
         ], 'ENGINE=InnoDB');
 
-        $this->createIndex('id_UNIQUE', 'scheduler_task','id',1);
-        $this->createIndex('name_UNIQUE', 'scheduler_task','name',1);
-        $this->addForeignKey('fk_scheduler_log_scheduler_task_id', 'scheduler_log', 'scheduler_task_id', 'scheduler_task', 'id');
+        $this->createIndex('id_UNIQUE', SchedulerTask::tableName(),'id',1);
+        $this->createIndex('name_UNIQUE', SchedulerTask::tableName(),'name',1);
+        $this->addForeignKey('fk_scheduler_log_scheduler_task_id', SchedulerLog::tableName(), 'scheduler_task_id', SchedulerTask::tableName(), 'id');
     }
 
     public function safeDown()
     {
-        $this->delete('scheduler_log');
-        $this->delete('scheduler_task');
+        $this->delete(SchedulerLog::tableName());
+        $this->delete(SchedulerTask::tableName());
 
-        $this->dropForeignKey('fk_scheduler_log_scheduler_task_id', 'scheduler_log');
-        $this->dropTable('scheduler_log');
-        $this->dropTable('scheduler_task');
+        $this->dropForeignKey('fk_scheduler_log_scheduler_task_id', SchedulerLog::tableName());
+        $this->dropTable(SchedulerLog::tableName());
+        $this->dropTable(SchedulerTask::tableName());
     }
 }

@@ -26,20 +26,6 @@ class Module extends WebModule
      */
     public $taskNameSpace = 'app\cron';
 
-    /**
-     * Bootstrap the console controllers.
-     * @param \yii\base\Application $app
-     */
-    public function bootstrap22($app)
-    {
-        Yii::setAlias('@scheduler', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src');
-
-        if ($app instanceof \yii\console\Application && !isset($app->controllerMap[$this->id])) {
-            $app->controllerMap[$this->id] = [
-                'class' => 'panix\mod\scheduler\commands\SchedulerController',
-            ];
-        }
-    }
 
     /**
      * Scans the taskPath for any task files, if any are found it attempts to load them,
@@ -56,7 +42,7 @@ class Module extends WebModule
             throw new \yii\base\ErrorException("Task directory ($dir) does not exist");
         }
 
-        $files = array_diff(scandir($dir), array('..', '.'));
+        $files = array_diff(scandir($dir), ['..', '.']);
         $tasks = [];
 
         foreach ($files as $fileName) {
@@ -114,6 +100,33 @@ class Module extends WebModule
 
         return $task;
     }
+    public function getAdminMenu()
+    {
+        return [
+            'modules' => [
+                'items' => [
+                    [
+                        'label' => Yii::t('scheduler/default', 'MODULE_NAME'),
+                        'url' => ['/admin/scheduler'],
+                        'icon' => $this->icon,
+                        'visible' => Yii::$app->user->can('/scheduler/admin/default/index') || Yii::$app->user->can('/scheduler/admin/default/*')
+                    ],
+                ],
+            ],
+        ];
+    }
 
+
+    public function getInfo()
+    {
+        return [
+            'label' => Yii::t('scheduler/default', 'MODULE_NAME'),
+            'author' => 'dev@pixelion.com.ua',
+            'version' => '1.0',
+            'icon' => $this->icon,
+            'description' => Yii::t('scheduler/default', 'MODULE_DESC'),
+            'url' => ['/admin/scheduler'],
+        ];
+    }
 
 }

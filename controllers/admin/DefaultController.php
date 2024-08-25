@@ -20,6 +20,8 @@ class DefaultController extends AdminController
      */
     public function actionIndex()
     {
+        $this->pageName = 'Scheduler';
+
         $model  = new SchedulerTask();
         $dataProvider = $model->search(Yii::$app->request->queryParams);
 

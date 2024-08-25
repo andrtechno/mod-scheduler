@@ -61,10 +61,8 @@ class CronTranslator
 
 
             return self::mbUcfirst(implode(' ', array_filter($answer)));
-            //} catch (Throwable $th) {
-            //     throw new CronParsingException($cron);
-        }catch (Exception $e){
-            print_r($e->getMessage());die;
+        } catch (Throwable $th) {
+            throw new CronParsingException($cron);
         }
     }
 

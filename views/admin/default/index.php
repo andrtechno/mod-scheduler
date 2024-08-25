@@ -8,7 +8,7 @@
  */
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\GridView;
+use panix\engine\grid\GridView;
 use yii\widgets\Pjax;
 
 $this->title = \panix\mod\scheduler\models\SchedulerTask::label(2);
@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php Pjax::begin(); ?>
         <?= GridView::widget([
             'layout' => '{summary}{pager}{items}{pager}',
+            'layoutOptions' => ['title' => $this->context->pageName],
             'dataProvider' => $dataProvider,
             'pager' => [
                 'class' => yii\widgets\LinkPager::className(),
